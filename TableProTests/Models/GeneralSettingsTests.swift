@@ -203,3 +203,27 @@ struct GeneralSettingsPartitionsTests {
         #expect(decoded.showPartitions == false)
     }
 }
+
+struct GeneralSettingsWelcomeVersionInfoTests {
+    @Test("Defaults to on")
+    func defaultsOn() {
+        #expect(GeneralSettings.default.showWelcomeVersionInfo == true)
+        #expect(GeneralSettings().showWelcomeVersionInfo == true)
+    }
+
+    @Test("Settings saved before the key existed keep the version line on the welcome window")
+    func decodesMissingKeyAsOn() throws {
+        let json = Data(#"{"startupBehavior":"showWelcome"}"#.utf8)
+        let decoded = try JSONDecoder().decode(GeneralSettings.self, from: json)
+        #expect(decoded.showWelcomeVersionInfo == true)
+    }
+
+    @Test("Round-trips when turned off")
+    func roundTripsDisabled() throws {
+        var settings = GeneralSettings()
+        settings.showWelcomeVersionInfo = false
+        let data = try JSONEncoder().encode(settings)
+        let decoded = try JSONDecoder().decode(GeneralSettings.self, from: data)
+        #expect(decoded.showWelcomeVersionInfo == false)
+    }
+}

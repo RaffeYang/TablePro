@@ -84,6 +84,9 @@ struct GeneralSettings: Codable, Equatable {
     /// Whether the window shows the workspace rail listing every open connection and database
     var showWorkspaceRail: Bool
 
+    /// Whether the welcome window shows the app version line and the Check for Updates link under it
+    var showWelcomeVersionInfo: Bool
+
     /// How tall sidebar rows are drawn, following the system Appearance setting unless overridden
     var sidebarRowSize: SidebarRowSizePreference
 
@@ -101,6 +104,7 @@ struct GeneralSettings: Codable, Equatable {
         showSystemContainers: false,
         showPartitions: true,
         showWorkspaceRail: true,
+        showWelcomeVersionInfo: true,
         sidebarRowSize: .matchSystem,
         connectionHealthCheck: .every30Seconds
     )
@@ -116,6 +120,7 @@ struct GeneralSettings: Codable, Equatable {
         showSystemContainers: Bool = false,
         showPartitions: Bool = true,
         showWorkspaceRail: Bool = true,
+        showWelcomeVersionInfo: Bool = true,
         sidebarRowSize: SidebarRowSizePreference = .matchSystem,
         connectionHealthCheck: ConnectionHealthCheck = .every30Seconds
     ) {
@@ -129,6 +134,7 @@ struct GeneralSettings: Codable, Equatable {
         self.showSystemContainers = showSystemContainers
         self.showPartitions = showPartitions
         self.showWorkspaceRail = showWorkspaceRail
+        self.showWelcomeVersionInfo = showWelcomeVersionInfo
         self.sidebarRowSize = sidebarRowSize
         self.connectionHealthCheck = connectionHealthCheck
     }
@@ -145,6 +151,7 @@ struct GeneralSettings: Codable, Equatable {
         showSystemContainers = try container.decodeIfPresent(Bool.self, forKey: .showSystemContainers) ?? false
         showPartitions = try container.decodeIfPresent(Bool.self, forKey: .showPartitions) ?? true
         showWorkspaceRail = try container.decodeIfPresent(Bool.self, forKey: .showWorkspaceRail) ?? true
+        showWelcomeVersionInfo = try container.decodeIfPresent(Bool.self, forKey: .showWelcomeVersionInfo) ?? true
         sidebarRowSize = try container.decodeIfPresent(
             SidebarRowSizePreference.self, forKey: .sidebarRowSize
         ) ?? .matchSystem

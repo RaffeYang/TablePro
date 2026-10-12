@@ -7,6 +7,7 @@ import SwiftUI
 
 struct WelcomeActionsPanel: View {
     @ObservedObject private var licenseManager = LicenseManager.shared
+    @ObservedObject private var settingsManager = AppSettingsManager.shared
     let onActivateLicense: () -> Void
     let onNewConnection: () -> Void
     let onOpenFile: () -> Void
@@ -35,16 +36,18 @@ struct WelcomeActionsPanel: View {
                     Text(verbatim: "TablePro")
                         .font(.title2.weight(.semibold))
 
-                    Text(String(format: String(localized: "Version %@"), Bundle.main.appVersion))
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
+                    if settingsManager.general.showWelcomeVersionInfo {
+                        Text(String(format: String(localized: "Version %@"), Bundle.main.appVersion))
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
 
-                    Button(updater.checkForUpdatesTitle) {
-                        updater.checkForUpdates()
+                        Button(updater.checkForUpdatesTitle) {
+                            updater.checkForUpdates()
+                        }
+                        .buttonStyle(.link)
+                        .font(.callout)
+                        .disabled(!updater.canCheckForUpdates)
                     }
-                    .buttonStyle(.link)
-                    .font(.callout)
-                    .disabled(!updater.canCheckForUpdates)
 
                     if showsWhatsNew {
                         Button(String(format: String(localized: "What's New in %@"), Bundle.main.appVersion)) {

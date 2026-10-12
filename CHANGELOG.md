@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- An option in General Settings to hide the version line and Check for Updates on the Welcome window.
+
 ## [0.80.0] - 2026-10-11
 
 Google Cloud IAM sign-in for MySQL and PostgreSQL on Cloud SQL, with no Cloud SQL Auth Proxy.

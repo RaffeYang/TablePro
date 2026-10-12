@@ -151,6 +151,10 @@ struct GeneralSettingsView: View {
             TrustedExternalConnectionsSection()
 
             Section {
+                Toggle("Show version and updates on the Welcome window", isOn: $settings.showWelcomeVersionInfo)
+                    .accessibilityIdentifier("welcome-version-info-toggle")
+                    .help("Shows the app version and the Check for Updates link under the app icon on the Welcome window. Turn it off to keep the welcome window plain.")
+
                 Toggle("Automatically check for updates", isOn: automaticallyChecksForUpdates)
                     .accessibilityIdentifier("automatic-update-check-toggle")
 
