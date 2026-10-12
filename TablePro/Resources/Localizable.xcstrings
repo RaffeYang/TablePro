@@ -161773,6 +161773,46 @@
         }
       }
     },
+    "Show version and updates on the Welcome window" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la version et les mises à jour dans la fenêtre d’accueil"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시작 윈도우에 버전 및 업데이트 보기"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karşılama penceresinde sürümü ve güncellemeleri göster"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiện phiên bản và cập nhật trên cửa sổ chào mừng"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在欢迎窗口显示版本和更新"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在歡迎視窗顯示版本和更新"
+          }
+        }
+      }
+    },
     "Show Welcome Screen" : {
       "localizations" : {
         "fr" : {
@@ -162407,6 +162447,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Montre comment le temps a été utilisé"
+          }
+        }
+      }
+    },
+    "Shows the version and Check for Updates under the app icon. An available update is shown either way." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Affiche la version et Rechercher les mises à jour sous l’icône de l’app. Une mise à jour disponible s’affiche dans tous les cas."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앱 아이콘 아래에 버전과 업데이트 확인을 표시합니다. 사용 가능한 업데이트는 어느 경우에나 표시됩니다."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uygulama simgesinin altında sürümü ve Güncellemeleri Kontrol Et bağlantısını gösterir. Mevcut bir güncelleme her durumda gösterilir."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiện phiên bản và Kiểm tra cập nhật dưới biểu tượng ứng dụng. Bản cập nhật có sẵn vẫn luôn được hiện."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在应用图标下方显示版本和“检查更新”。有可用更新时始终会显示。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 App 圖示下方顯示版本和「檢查更新」。有可用更新時一律會顯示。"
           }
         }
       }

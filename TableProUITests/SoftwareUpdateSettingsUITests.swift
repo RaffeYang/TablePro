@@ -17,7 +17,6 @@ final class SoftwareUpdateSettingsUITests: UITestCase {
         let app = try launchApp()
         openGeneralSettings(in: app)
 
-        XCTAssertTrue(app.switches["welcome-version-info-toggle"].firstMatch.waitToExist(timeout: 10))
         XCTAssertTrue(app.switches["automatic-update-check-toggle"].firstMatch.waitToExist(timeout: 10))
         XCTAssertTrue(app.switches["automatic-update-install-toggle"].firstMatch.waitToExist(timeout: 10))
         XCTAssertTrue(app.buttons["check-for-updates-button"].firstMatch.waitToExist(timeout: 10))

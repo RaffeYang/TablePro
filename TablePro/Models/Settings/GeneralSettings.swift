@@ -5,7 +5,6 @@
 
 import Foundation
 
-/// Startup behavior when app launches
 enum StartupBehavior: String, Codable, CaseIterable, Identifiable {
     case showWelcome = "showWelcome"
     case reopenLast = "reopenLast"
@@ -20,7 +19,6 @@ enum StartupBehavior: String, Codable, CaseIterable, Identifiable {
     }
 }
 
-/// App language options
 enum AppLanguage: String, Codable, CaseIterable, Identifiable {
     case system = "system"
     case english = "en"
@@ -55,42 +53,21 @@ enum AppLanguage: String, Codable, CaseIterable, Identifiable {
     }
 }
 
-/// General app settings
 struct GeneralSettings: Codable, Equatable {
     var startupBehavior: StartupBehavior
     var language: AppLanguage
 
-    /// Query execution timeout in seconds (0 = no limit)
+    // 0 means no limit
     var queryTimeoutSeconds: Int
-
-    /// Whether to share anonymous usage analytics
     var shareAnalytics: Bool
-
-    /// Whether the sidebar shows a Recent section with recently opened tables
     var showRecentTables: Bool
-
-    /// Whether to show database object comments in the sidebar and data grid headers
     var showObjectComments: Bool
-
-    /// Whether sidebar rows show a type icon before the object name
     var showObjectIcons: Bool
-
-    /// Whether the sidebar tree and its database filter list system databases and schemas
     var showSystemContainers: Bool
-
-    /// Whether a partitioned table lists its partitions in the sidebar and shows how many it holds
     var showPartitions: Bool
-
-    /// Whether the window shows the workspace rail listing every open connection and database
     var showWorkspaceRail: Bool
-
-    /// Whether the welcome window shows the app version line and the Check for Updates link under it
     var showWelcomeVersionInfo: Bool
-
-    /// How tall sidebar rows are drawn, following the system Appearance setting unless overridden
     var sidebarRowSize: SidebarRowSizePreference
-
-    /// How often TablePro checks that an open connection still works
     var connectionHealthCheck: ConnectionHealthCheck
 
     static let `default` = GeneralSettings(

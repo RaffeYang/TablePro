@@ -1,4 +1,3 @@
-import TableProPluginKit
 import XCTest
 
 final class WelcomeWindowUITests: UITestCase {
@@ -55,44 +54,39 @@ final class WelcomeWindowUITests: UITestCase {
         XCTAssertTrue(waitForSampleDatabaseWindow(in: app), "Open Sample Database must open the sample")
     }
 
-    func testTheWelcomeWindowShowsTheVersionAndTheUpdateCheck() throws {
-        let app = try launchApp()
-        let welcome = app.windows["welcome"]
+    func testTheVersionSettingHidesTheVersionAndTheUpdateCheckOnTheOpenWindow() throws {
+        let app = try launchApp(arguments: ["-AppleLanguages", "(en)"])
+        let welcome = app.children(matching: .window).matching(identifier: "welcome").firstMatch
         XCTAssertTrue(welcome.waitToExist(timeout: 10))
 
+        let versionLine = welcome.descendants(matching: .any).matching(identifier: "welcome-version-line").firstMatch
+        let updateCheck = welcome.descendants(matching: .any)
+            .matching(identifier: "welcome-check-for-updates-link").firstMatch
+        XCTAssertTrue(versionLine.waitToExist(timeout: 10), "The welcome window must show the version by default")
+        XCTAssertTrue(updateCheck.exists, "The welcome window must offer the update check by default")
+
+        app.menuBars.menuItems["Settings…"].click()
+        let settings = app.children(matching: .window).matching(identifier: "settings").firstMatch
+        XCTAssertTrue(settings.waitToExist(timeout: 10), "Settings must open")
+        let generalPaneButton = settings.toolbars.buttons["General"]
+        XCTAssertTrue(generalPaneButton.waitToExist(timeout: 10))
+        generalPaneButton.click()
+
+        let toggle = settings.descendants(matching: .any)
+            .matching(identifier: "welcome-version-info-toggle").firstMatch
+        XCTAssertTrue(waitUntilHittable(toggle, timeout: 10), "The General pane must offer the setting")
+        XCTAssertTrue(isOn(toggle), "The setting must start on")
+
+        toggle.click()
         XCTAssertTrue(
-            welcome.links["Check for Updates…"].waitToExist(timeout: 10),
-            "The welcome window must offer the update check by default"
-        )
-        let versionLine = welcome.staticTexts
-            .matching(NSPredicate(format: "label BEGINSWITH %@", "Version"))
-            .firstMatch
-        XCTAssertTrue(versionLine.waitToExist(timeout: 10), "The welcome window must show the app version")
-    }
-
-    /// The setting is seeded straight into the suite the app reads rather than clicked in Settings,
-    /// because the toggle sits far enough down the General pane that the runner's screen needs the
-    /// pane scrolled to reach it.
-    func testTurningTheSettingOffHidesTheVersionAndTheUpdateCheck() throws {
-        let seeded = try XCTUnwrap(UserDefaults(suiteName: PluginHostStorage.sandboxSuiteName))
-        seeded.set(
-            Data(#"{"startupBehavior":"showWelcome","showWelcomeVersionInfo":false}"#.utf8),
-            forKey: "com.TablePro.settings.general"
+            waitForPredicate(timeout: 10) { !versionLine.exists && !updateCheck.exists },
+            "Turning the setting off must hide the version and the update check on the open welcome window"
         )
 
-        let app = try launchApp()
-        let welcome = app.windows["welcome"]
-        XCTAssertTrue(welcome.waitToExist(timeout: 10))
-        // The panel must have mounted before an absence means anything.
-        XCTAssertTrue(welcome.buttons["New Connection…"].waitToExist(timeout: 10))
-
-        let versionLine = welcome.staticTexts
-            .matching(NSPredicate(format: "label BEGINSWITH %@", "Version"))
-            .firstMatch
-        let updateCheck = welcome.links["Check for Updates…"]
+        toggle.click()
         XCTAssertTrue(
-            waitForPredicate(timeout: 5) { !versionLine.exists && !updateCheck.exists },
-            "A welcome window with the version info off must show neither the app version nor the update check"
+            waitForPredicate(timeout: 10) { versionLine.exists && updateCheck.exists },
+            "Turning the setting back on must restore both"
         )
     }
 }

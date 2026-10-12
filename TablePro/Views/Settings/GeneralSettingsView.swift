@@ -76,6 +76,10 @@ struct GeneralSettingsView: View {
                 }
             }
 
+            Toggle("Show version and updates on the Welcome window", isOn: $settings.showWelcomeVersionInfo)
+                .accessibilityIdentifier("welcome-version-info-toggle")
+                .help("Shows the version and Check for Updates under the app icon. An available update is shown either way.")
+
             Section("Tabs") {
                 Toggle("Enable preview tabs", isOn: $tabSettings.enablePreviewTabs)
                     .help("Single-clicking a table opens a temporary tab that gets replaced on next click.")
@@ -151,10 +155,6 @@ struct GeneralSettingsView: View {
             TrustedExternalConnectionsSection()
 
             Section {
-                Toggle("Show version and updates on the Welcome window", isOn: $settings.showWelcomeVersionInfo)
-                    .accessibilityIdentifier("welcome-version-info-toggle")
-                    .help("Shows the app version and the Check for Updates link under the app icon on the Welcome window. Turn it off to keep the welcome window plain.")
-
                 Toggle("Automatically check for updates", isOn: automaticallyChecksForUpdates)
                     .accessibilityIdentifier("automatic-update-check-toggle")
 
