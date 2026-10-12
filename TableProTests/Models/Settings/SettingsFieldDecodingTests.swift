@@ -55,11 +55,11 @@ struct SettingsFieldDecodingTests {
     func mcpKeepsOtherFields() throws {
         let settings = try decode(
             MCPSettings.self,
-            #"{"enabled":true,"port":24000,"requireAuthentication":"no","connectionApproval":"whenever"}"#
+            #"{"enabled":true,"port":24000,"allowsHiddenConnectionListing":"yes","connectionApproval":"whenever"}"#
         )
         #expect(settings.enabled == true)
         #expect(settings.port == 24_000)
-        #expect(settings.requireAuthentication == true)
+        #expect(settings.allowsHiddenConnectionListing == false)
         #expect(settings.connectionApproval == MCPSettings.default.connectionApproval)
     }
 
@@ -71,15 +71,14 @@ struct SettingsFieldDecodingTests {
         #expect(settings.syncConnections == SyncSettings.default.syncConnections)
     }
 
-    @Test("A bad notification kind entry is dropped and the rest are kept")
-    func notificationsDropBadKindEntry() throws {
+    @Test("A bad notification threshold falls back and the switch is kept")
+    func notificationsDropBadThreshold() throws {
         let settings = try decode(
             NotificationSettings.self,
-            #"{"isEnabled":false,"thresholdSeconds":45,"disabledKindIds":["export",7,"import"]}"#
+            #"{"isEnabled":false,"thresholdSeconds":"soon","disabledKindIds":["export",7]}"#
         )
         #expect(settings.isEnabled == false)
-        #expect(settings.thresholdSeconds == 45)
-        #expect(settings.disabledKindIds == ["export", "import"])
+        #expect(settings.thresholdSeconds == NotificationSettings.defaultThresholdSeconds)
     }
 
     @Test("A bad shortcut entry is dropped and the other shortcuts are kept")

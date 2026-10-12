@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Themes that name a system color for a slot, so the built-in themes keep the system's own contrast settings.
 - Reason shown in Settings > Appearance for a theme file that could not be loaded.
 - An option in General Settings to hide the version line and Check for Updates on the Welcome window.
+- Install Parquet… in the Export dialog's format menu when the Parquet plugin is not installed.
 
 ### Changed
 
@@ -27,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - tablepro command ships inside the app. Settings > General shows the Terminal line that links it; no administrator prompt.
 - MCP server runs only while Enable MCP Server is on in Settings > MCP. Clients and pairing no longer start it while it is off.
 - Edit > Data shown only in data file windows.
-- Delta updates from the last five releases, about 6 MB instead of the full 34 MB download.
+- Smaller updates: about 6 MB from any of the last five releases and 21 MB from older ones, down from 34 MB.
 
 ### Removed
 
@@ -47,6 +48,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - File > Server-Side Export… for Oracle, Snowflake and BigQuery. Run the unload statement in a query tab instead.
 - Cursor AI provider. A saved Cursor provider is dropped; Cursor still reaches TablePro through the MCP server.
 - Sign in with xAI. An xAI provider now needs an xAI API key.
+- Per-kind toggles in Settings > Notifications. Kinds you turned off notify again while notifications are on.
+- Require authentication switch in Settings > MCP. Every MCP request needs a token, including one from this Mac.
 
 ### Fixed
 
@@ -65,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Theme color wells and the theme preview unreadable to VoiceOver.
 - Reopen Last Session forgetting its connections after an MCP client launched TablePro in the background.
 - GitHub Copilot starting at launch when not in use, and running on after AI was turned off or Copilot was removed.
+- Settings > AI reading sign-in tokens and running command line tools for providers that were never added.
 
 ### Security
 
